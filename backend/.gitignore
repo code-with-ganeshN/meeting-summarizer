@@ -1,0 +1,51 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Uploaded audio files
+uploads/
+
+# Build output (if any)
+dist/
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# OS files
+*.ini
+*.dat
+*.txt
+
+# IDE files
+.vscode/
+.vscode-remote-wsl/
+*.iml
+
+# Node modules (if any)
+node_modules/
+
+# Audio samples (optional if too big)
+audio-sample-*.*
+
