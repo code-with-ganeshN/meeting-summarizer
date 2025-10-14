@@ -87,7 +87,7 @@ This Node.js backend service allows users to upload audio files, transcribe them
 
 
 
-📤 API Endpoint
+## 📤 API Endpoint
 
 
       
@@ -108,7 +108,7 @@ This Node.js backend service allows users to upload audio files, transcribe them
 
 
 
-2.🧠 How It Works
+## 🧠 How It Works
 
   Audio file is uploaded via Multer
 
@@ -125,12 +125,12 @@ This Node.js backend service allows users to upload audio files, transcribe them
 
 
 
-3.🔐 How to Get API Keys
+## 🔐 How to Get API Keys
   
   
 	🧠 AssemblyAI API Key
       
-  AssemblyAI provides speech-to-text transcription services.
+  ## 🌟 AssemblyAI provides speech-to-text transcription services.
       
   Go to https://www.assemblyai.com
 
@@ -145,7 +145,7 @@ This Node.js backend service allows users to upload audio files, transcribe them
     ASSEMBLYAI_API_KEY=your_assemblyai_api_key_here
     
 
-  🌟 Gemini (Google Generative Language API) Key
+  ## 🌟 Gemini (Google Generative Language API) Key
    
    Gemini 2.5 Flash is part of Google's Generative Language API.
 
