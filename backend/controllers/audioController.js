@@ -2,7 +2,6 @@ import axios from "axios";
 import Audio from "../models/AudioModel.js";
 import fs from "fs";
 
-// Helper function to split text into chunks
 const chunkText = (text, chunkSize = 4000) => {
   const chunks = [];
   for (let i = 0; i < text.length; i += chunkSize) {
@@ -47,9 +46,11 @@ export const processAudio = async (req, res) => {
       await new Promise((r) => setTimeout(r, 5000));
     }
 
-    // 4️⃣ Summarize in chunks using Gemini 2.5 Flash
+    // 4️⃣ Split transcript into manageable chunks
     const chunks = chunkText(transcriptText, 4000);
-    let combinedSummary = "";
+
+    // Step 1: Get partial summaries for each chunk
+    let partialSummaries = [];
 
     for (const chunk of chunks) {
       const summaryRes = await axios.post(
@@ -59,7 +60,7 @@ export const processAudio = async (req, res) => {
             {
               parts: [
                 {
-                  text: `Summarize the following meeting text in concise points:\n\n${chunk}`
+                  text: `Summarize this part of a meeting transcript briefly:\n\n${chunk}`
                 }
               ]
             }
@@ -68,27 +69,51 @@ export const processAudio = async (req, res) => {
       );
 
       const summaryText =
-        summaryRes.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-      combinedSummary += summaryText
-        ? summaryText + "\n"
-        : "[No summary returned]\n";
+        summaryRes.data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      partialSummaries.push(summaryText.trim());
     }
 
-    const summary = combinedSummary.trim() || "No summary.";
+    // Step 2: Merge all partial summaries into one text
+    const mergedSummaryText = partialSummaries.join("\n");
+
+    // Step 3: Generate final combined meeting summary and action items
+    const finalRes = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        contents: [
+          {
+            parts: [
+              {
+                text: `You are an expert meeting summarizer. Based on the following summarized segments, create ONE cohesive final summary covering the entire meeting. 
+Include:
+1. A concise meeting summary paragraph.
+2. A clear list of key decisions made.
+3. A list of actionable items with responsible persons if mentioned.
+
+Meeting Summaries:\n\n${mergedSummaryText}`
+              }
+            ]
+          }
+        ]
+      }
+    );
+
+    const fullSummary =
+      finalRes.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "No final summary generated.";
 
     // 5️⃣ Save to MongoDB
     const audioDoc = new Audio({
       filename: req.file.originalname,
       transcript: transcriptText,
-      summary,
+      summary: fullSummary,
     });
     await audioDoc.save();
 
     // 6️⃣ Delete uploaded audio file
     fs.unlinkSync(filePath);
 
-    res.json({ transcript: transcriptText, summary });
+    res.json({ transcript: transcriptText, summary: fullSummary });
   } catch (error) {
     console.error("Error processing audio:", error);
     res.status(500).json({
