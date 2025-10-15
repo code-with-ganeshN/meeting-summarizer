@@ -5,7 +5,7 @@ This Node.js backend service allows users to upload audio files, transcribe them
 ## Demo Video
 https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
 
-## 🚀 Features
+## Features
 
 - Upload `.mp3`, `.wav`, or other audio formats
 - Transcribe audio to text using AssemblyAI
@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
 - Stores transcript and summary in MongoDB
 - Deletes uploaded audio file after processing
 
-## 📦 Tech Stack
+## Tech Stack
 
 - Node.js + Express
 - MongoDB + Mongoose
@@ -23,7 +23,7 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
 - Gemini 2.5 Flash for summarization
 - Multer for file uploads
 
-## 📁 File Structure
+## File Structure
 
     audioSummarizer/
     │
@@ -61,7 +61,7 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
 
 
 
-## 🔧 Setup Instructions
+## Setup Instructions
 
 1. Clone the repo**
 
@@ -90,7 +90,7 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
 
 
 
-## 📤 API Endpoint
+## API Endpoint
 
 
       
@@ -102,7 +102,7 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
   
   Body: audio field containing the file
 
-  ✅ Response
+  Response
               
               {
                   "transcript": "Full transcript text...",
@@ -111,7 +111,7 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
 
 
 
-## 🧠 How It Works
+## How It Works
 
   Audio file is uploaded via Multer
 
@@ -128,12 +128,12 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
 
 
 
-## 🔐 How to Get API Keys
+## How to Get API Keys
   
   
-	🧠 AssemblyAI API Key
+	 AssemblyAI API Key
       
-  ## 🌟 AssemblyAI provides speech-to-text transcription services.
+  ## AssemblyAI provides speech-to-text transcription services.
       
   Go to https://www.assemblyai.com
 
@@ -148,7 +148,7 @@ https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
     ASSEMBLYAI_API_KEY=your_assemblyai_api_key_here
     
 
-  ## 🌟 Gemini (Google Generative Language API) Key
+  ## Gemini (Google Generative Language API) Key
    
    Gemini 2.5 Flash is part of Google's Generative Language API.
 
