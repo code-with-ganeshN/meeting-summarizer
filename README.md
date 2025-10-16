@@ -3,7 +3,7 @@
 This Node.js backend service allows users to upload audio files, transcribe them using [AssemblyAI](https://www.assemblyai.com/), and summarize the transcript using [Gemini 2.5 Flash](https://ai.google.dev/). The final transcript and summary are stored in MongoDB.
 
 ## Demo Video
-https://github.com/user-attachments/assets/72f95d0e-4d12-416b-99a9-79986a5cb2a1
+https://github.com/user-attachments/assets/50845a01-1938-45d8-897e-4fff7868cf1c
 
 ## Features
 
